@@ -56,6 +56,22 @@ class Administratie extends MY_Controller
 		redirect('administratie', 'refresh');
 		$this->load->view('templates/footer', $data);
 	}
+	//Loads the XMLs provided by the teachers
+	function loadxml()
+	{
+		$this->load->model('Xmlparser_model','',true);
+		$data['title'] = "Administratie";
+		$session_data = $this->session->userdata('logged_in');
+		$data['username'] = $session_data['username'];
+		$rolename = $session_data['role'];
+		$data['rolename'] = $rolename;
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/menu', $data);
+		$this->Xmlparser_model->insert();
+		echo("<script>alert('XML ingeladen in de database!');</script>");
+		redirect('administratie', 'refresh');
+		$this->load->view('templates/footer', $data);
+	}
 	//Cleans up entries from the database which are no longer relevant [such as deleted files].
 	function cleanupdatabase()
 	{

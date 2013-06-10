@@ -16,7 +16,7 @@ Class Globalfunc extends CI_Model
 			return $row->name;
 		}
 	}
-	//Returns name of a study by its unique id.
+	//Returns ID of a study by its name
 	function getstudyidfromname($studyname)
 	{
 		$query = $this->db->query("SELECT id FROM study WHERE name = '$studyname'");
@@ -59,6 +59,24 @@ Class Globalfunc extends CI_Model
 	function subjectexists($subjectid)
 	{
 		$query = $this->db->query("SELECT * FROM subject WHERE subjectid = '$subjectid'");
+		$count = 0;
+		foreach($query->result() as $row)
+		{
+			$count++;
+		}
+		if($count > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	//Checks if a study exists in our local database.
+	function studyexists($studyid)
+	{
+		$query = $this->db->query("SELECT * FROM study WHERE id = '$studyid'");
 		$count = 0;
 		foreach($query->result() as $row)
 		{

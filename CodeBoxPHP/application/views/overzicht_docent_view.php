@@ -11,8 +11,14 @@
 	{
 		$name = $row->name;
 		$base = base_url();
-		//echo("<li><a href='$base" . "index.php/overzicht/choice/$row->id'>$name</a></li>");
-		echo("<tr><td><a href='$base" . "index.php/overzicht/choice/$row->id'>$name</a></td></tr>");
+		if (strpos($name,'DOCENTEN') !== false) 
+		{
+			//echo("<li><a href='$base" . "index.php/overzicht/choice/$row->id'>$name</a></li>");
+		}
+		else
+		{
+			echo("<tr><td><a href='$base" . "index.php/overzicht/choice/$row->id'>$name</a></td></tr>");
+		}
 	}
 ?>
 </table>

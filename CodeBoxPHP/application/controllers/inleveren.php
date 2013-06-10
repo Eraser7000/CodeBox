@@ -9,6 +9,12 @@ class Inleveren extends MY_Controller
 		$this->load->helper(array('form', 'url'));
 		$this->load->model('user','',TRUE);
 		$this->load->model('globalfunc','',TRUE);
+		$session_data = $this->session->userdata('logged_in');
+		$rolename = $session_data['role'];
+		if($rolename == 'administrator' || $rolename == 'docent')
+		{
+			redirect('home', 'refresh');
+		}
 	}
 	//called when the controller inleveren is being called from index [without any parameters]
 	//This gives a list of subjects for the study the person is in.
@@ -96,6 +102,10 @@ class Inleveren extends MY_Controller
 					echo("<script>alert('Hier ging even wat mis, we gaan even terug naar de vorige pagina.');</script>");
 					redirect('inleveren', 'refresh');
 				}
+			}
+			else
+			{
+				redirect('inleveren', 'refresh');
 			}
 		}
 		else

@@ -39,6 +39,8 @@ class Xmlparser_model extends CI_Model {
 		$xml = simplexml_load_file("uploads/".$file);
 		foreach($xml as $course)
 		{
+			$studyid = $this->globalfunc->getstudyidfromname((string)$course->study);
+			if(!$this->globalfunc->studyexists($studyid)) { continue; }
 			$this->db->select('Shortname');
 			$this->db->from('subject');
 			$this->db->where('Shortname', (string)$course->shortname);
@@ -47,7 +49,6 @@ class Xmlparser_model extends CI_Model {
 			if($d->num_rows() == 0)
 			{
 				$date = date_create($course->expire);
-				$studyid = $this->globalfunc->getstudyidfromname((string)$course->study);
 				$courses = array (
 					'Name' => (string)$course->name,
 					'Shortname' => (string) $course->shortname,

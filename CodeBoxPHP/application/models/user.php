@@ -206,9 +206,20 @@ Class User extends CI_Model
 			$fullname = $this->getfullnamefromldap($username);
 			$studyid = -1;
 			$rolename = $this->getrolefromldap($username);
-			if(!$this->studyexists($studyname) && $rolename == "student")
+			if($rolename == "docent")
 			{
-				$this->db->query("INSERT INTO study (name) VALUES ('$studyname')");
+				$studyname = "DOCENTEN - " . $studyname;
+			}
+			if(!$this->studyexists($studyname))
+			{
+				if($rolename == "student")
+				{
+					$this->db->query("INSERT INTO study (name) VALUES ('$studyname')");
+				}
+				else
+				{
+					$this->db->query("INSERT INTO study (name) VALUES ('$studyname')");
+				} 
 			}
 			$query = $this->db->query("SELECT id FROM study WHERE name = '$studyname' LIMIT 1");
 			$result = $query->result();

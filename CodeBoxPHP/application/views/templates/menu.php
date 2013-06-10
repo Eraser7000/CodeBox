@@ -4,7 +4,11 @@
 			<img src = "<?=base_url()?>/images/nhl_logowhite.png" heigth = "100px" width = "180px">
 			<nav>
 				<a href="<?=base_url() . 'index.php'?>/home"><span>Home</span></a>
-				<a href="<?=base_url() . 'index.php'?>/inleveren"><span>Inleveren</span></a>
+				<?php if($rolename == "student")
+				{		
+					$base = base_url() . 'index.php';
+					echo("<a href='$base/inleveren'><span>Inleveren</span></a>");
+				} ?>
 				<a href="<?=base_url() . 'index.php'?>/overzicht"><span>Overzicht</span></a>
 				<a href="<?=base_url() . 'index.php'?>/profiel"><span>Mijn Profiel</span></a>
 				<?php if($rolename == 'administrator')

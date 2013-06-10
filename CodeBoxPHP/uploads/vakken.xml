@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<courses>  
+  <course>  
+        <name>Analyse - Jaar 1</name>
+		    <shortname>ana</shortname>
+		    <study>Informatica BA</study>
+        <description>Analyse</description>
+		    <expire>24-01-2013 23:59</expire>
+  </course>
+  <course>  
+        <name>Programmeren 1 - Jaar 1</name> 
+		    <shortname>prog1</shortname>
+		    <study>Informatica BA</study>
+        <description>Programmeren</description>
+		    <expire>24-01-2013 23:59</expire>
+  </course> 
+  <course>  
+        <name>Databases - Jaar 1</name> 
+		    <shortname>db</shortname>
+		    <study>Informatica BA</study>
+        <description>Databases 1 </description>
+		    <expire>24-01-2013 11:00</expire>
+  </course>
+  <course>  
+        <name>Discrete Wiskunde - Jaar 1</name> 
+		    <shortname>diwi</shortname>
+		    <study>Informatica BA</study>
+        <description>Discrete Wiskunde</description>
+		    <expire>24-01-2013 23:59</expire>
+  </course>
+  <course>  
+        <name>Cybercrime - Jaar 1</name> 
+		    <shortname>cyber</shortname>
+		    <study>Informatica BA</study>
+        <description>Cybercrime</description>
+		    <expire>10-06-2013 23:59:59</expire>
+  </course>
+  <course>  
+        <name>Programmeren 2 - Jaar 1</name> 
+        <shortname>prog3</shortname>
+        <study>Informatica BA</study>
+        <description>Programmeren 3</description>
+        <expire>10-06-2013 23:59:59</expire>
+  </course>
+  <course>  
+        <name>Programmeren 3 - Jaar 1</name> 
+        <shortname>prog3</shortname>
+        <study>Informatica BA</study>
+        <description>Programmeren 3</description>
+        <expire>10-06-2013 23:59:59</expire>
+  </course>
+  <course>  
+        <name>Wiskunde Basis - Jaar 1</name> 
+        <shortname>wiba</shortname>
+        <study>Informatica BA</study>
+        <description>Wiskunde Basis</description>
+        <expire>10-06-2013 23:59:59</expire>
+  </course>
+    <course>  
+        <name>Cryptografie - Jaar 1</name> 
+        <shortname>crypt</shortname>
+        <study>Informatica BA</study>
+        <description>Cryptografie</description>
+        <expire>10-06-2013 23:59:59</expire>
+  </course>
+</courses>
