@@ -16,7 +16,7 @@
 					<h2>Wachtwoord</h2>
 					<input id = "password" type="password" size="12" maxlength="30" name="password" Class = "boxes"><b><?php echo form_error('password'); ?></b><br />
 					<br/>
-					<button id = "button" type="submit">Inloggen >></button><a href="home/vergeten">wachtwoord vergeten?</a>
+					<button id = "button" type="submit">Inloggen >></button><a href="http://www.cpw.nhl.nl/">wachtwoord vergeten?</a>
 					<br/><br/>
 					<div><b><?php if(!$available) { echo("<img src='$basecss/images/notdone.jpg'?> LDAP server niet bereikbaar, u kunt niet inloggen met uw NHL account."); } 
 					else { echo("<img src='$basecss/images/done.jpg'?> U kunt inloggen met uw NHL account."); } ?></b></div>
