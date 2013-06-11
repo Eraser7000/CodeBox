@@ -73,6 +73,39 @@ Class Globalfunc extends CI_Model
 			return false;
 		}
 	}
+	//Deletes all subjects from the database.
+	function deleteallsubjects()
+	{
+		$query = $this->db->query("DELETE FROM subject");
+	}
+	//Deletes a specific subject
+	function deletesubject($subjectid)
+	{
+		$query = $this->db->query("DELETE FROM files WHERE subjectid = '$subjectid'");
+		$query2 = $this->db->query("DELETE FROM subject WHERE subjectid = '$subjectid'");
+	}
+	//Deletes a file
+	function deletefile($user,$subjectid)
+	{
+		$query = $this->db->query("SELECT * FROM users,subject WHERE subject.subjectid = '$subjectid' AND users.username = '$user'");
+		$fileformat = "";
+		foreach($query->result() as $row)
+		{
+			$shortname = $row->Shortname;
+			$fileformat = $shortname . "_" . $user . "_";
+ 			break;
+		}
+		$path = $_SERVER['DOCUMENT_ROOT'].'/CodeBox/files/';
+		$files = glob($path.$fileformat.'*'); // get all file names
+    	foreach($files as $file)
+    	{ // iterate files
+      		if(is_file($file))
+      		{
+        		unlink($file);
+        	}
+    	} 
+    	$query = $this->db->query("DELETE FROM files WHERE name like '$fileformat%'");
+	}
 	//Checks if a study exists in our local database.
 	function studyexists($studyid)
 	{

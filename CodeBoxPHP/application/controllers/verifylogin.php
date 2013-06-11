@@ -16,6 +16,8 @@ class VerifyLogin extends CI_Controller
 		$this->load->library('form_validation');
 	    $this->form_validation->set_rules('username', 'username', 'trim|required|xss_clean');
 	    $this->form_validation->set_rules('password', 'password', 'trim|required|xss_clean|callback_check_database');
+	    $this->form_validation->set_message('required', ' * verplicht');
+	    $this->form_validation->set_error_delimiters('', '');
 		if($this->form_validation->run() == FALSE)
 		{
 			$this->load->view('login_view',array('available' => _useLDAP_)); //$this->user->ldapavailable()
@@ -27,6 +29,7 @@ class VerifyLogin extends CI_Controller
 	}
 	//Checks if the user is valid or not and entered the correct password.
 	//Also handles adminaccounts which are being redirected to the local database for auth.
+	//Handles LDAP-offline function too.
 	function check_database($password)
 	{
 		if(_useLDAP_)
@@ -83,7 +86,6 @@ class VerifyLogin extends CI_Controller
 						'role' => 'administrator'
 					);
 					$this->session->set_userdata('logged_in', $sess_array);
-					//echo("<script>alert('ZOOI: " . $sess_array['activated'] . "=" . $this->user->isactivated($username) . "');</script>");
 					return true;
 				}
 				else

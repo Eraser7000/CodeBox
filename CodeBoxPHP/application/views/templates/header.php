@@ -3,7 +3,7 @@
 		<title><?php echo $title ?> - CodeBox</title>
 		<link rel="stylesheet" type="text/css" href="<?=base_url()?>css/qwerty.css" />
 		<link rel="stylesheet" type="text/css" href="<?=base_url()?>css/loader.css" />
-	    <script language="javascript" type="text/javascript">
+	     <script language="javascript" type="text/javascript">
 	        function printDiv(divID) 
 	        {
 	            //Get the HTML of div
@@ -24,7 +24,18 @@
 
 	          
 	        }
+			function checkLoad()
+			{
+			   	if(document.getElementById("bottom"))
+			  	{	
+					document.getElementById("preLoaderDiv").style.visibility = "hidden";
+				}
+			}
+			setInterval("checkLoad()",500);
 	    </script>
 	</head>
 	<body>
-		<h1 class = "content">Codebox - Welkom <?php echo $username?>, u bent ingelogd als <?php echo $rolename ?></h1>
+		<h1 class = "content">Codebox - Welkom <?php $usernamevar = $this->user->getfullnamefromdb($username); echo $usernamevar?>, u bent ingelogd als <?php echo $rolename ?></h1>
+		<div id="preLoaderDiv">
+			<img id="preloaderAnimation" src="/images/loader.gif" />
+		</div>

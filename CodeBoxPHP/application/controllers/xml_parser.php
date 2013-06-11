@@ -25,6 +25,7 @@ class Xml_parser extends AD_Controller{
 		$this->load->view('templates/backend/footer');		
 		
 		$this->load->model('xmlparser_model');
+		$this->globalfunc->deleteallsubjects();
 		$this->xmlparser_model->insert();
 	}
 //shows all the data from the xml table inside our database. 

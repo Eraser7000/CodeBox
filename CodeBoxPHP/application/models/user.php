@@ -24,6 +24,12 @@ Class User extends CI_Model
 			return false;
 		}
 	}
+	//Executes a query deleting all users in the users table
+	function deleteallusers()
+	{
+		$this->db->query("DELETE FROM users WHERE username NOT LIKE 'admin_%'");
+		return true;
+	}
 	//Activates a local account
 	function activateaccount($username,$password)
 	{
@@ -165,7 +171,7 @@ Class User extends CI_Model
 		{
 			$studyid = $row->studyid;
 		}
-		$query2 = $this->db->query("SELECT username FROM users WHERE studyid = '$studyid'");
+		$query2 = $this->db->query("SELECT username FROM users WHERE studyid = '$studyid' AND name NOT LIKE 'admin_%'");
 		return $query2->result();
 	}
 	//gets email from database

@@ -142,7 +142,7 @@
 			$entries = ldap_get_entries($connection, $search);
 			if(count($entries) == 1)
 			{
-				$dn = "ou=Techniek,ou=studenten," . $master; //ou=voltijd,ou=Informatica BA,ou=Techniek,ou=studenten,
+				$dn = "ou=Informatica BA,ou=Techniek,ou=studenten," . $master; //ou=voltijd,ou=Informatica BA,ou=Techniek,ou=studenten,
 				$filter = "uid=" . $username;
 				$search = ldap_search($connection, $dn, $filter);
 				$entries = ldap_get_entries($connection, $search);
@@ -179,7 +179,7 @@
 			$search = ldap_search($connection, $dn, $filter) or die ("Search failed");
 			$entries = ldap_get_entries($connection, $search);
 			ldap_close($connection);
-			return $entries[0]["cn"][0];
+			return ucfirst($entries[0]["givenname"][0]) . " " . ucfirst($entries[0]["sn"][0]);
 		}
 		public static function ldapallteachers()
 		{
@@ -216,7 +216,7 @@
 				die("error");
 			}
 
-			$dn = "ou=Techniek,ou=studenten,o=Noordelijke Hogeschool Leeuwarden,c=nl"; //ou=voltijd,ou=Informatica BA,ou=Techniek,ou=studenten,
+			$dn = "ou=Informatica BA,ou=Techniek,ou=studenten,o=Noordelijke Hogeschool Leeuwarden,c=nl"; //ou=voltijd,ou=Informatica BA,ou=Techniek,ou=studenten,
 			$filter = "uid=*";
 			$search = ldap_search($connection, $dn, $filter);
 			$entries = ldap_get_entries($connection, $search);

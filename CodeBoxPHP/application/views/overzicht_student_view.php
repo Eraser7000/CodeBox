@@ -12,7 +12,7 @@
 	}
 	else
 	{
-		echo("<table border='1'><tr><th>Studie</th><th>Status</th><th>Deadline</th></tr>");
+		echo("<table border='1'><tr><th>Vak</th><th>Status</th><th>Deadline</th><th>Inleveren</th></tr>");
 		foreach ($result as $row)
 		{
 			$vaknaam = $row->name;
@@ -25,23 +25,34 @@
 			$datedisplay = $date->format('d/m/Y H:i:s');
 			$expiretxt = "";
 			$basecss = base_url();
+			$base = base_url() . "index.php";
 			if($expired)
 			{
 				$expiretxt = "<img src='$basecss/images/expired.jpg' alt='Verlopen'>";
 			}
-			else
-			{
-				$expiretxt = "actief";
-			}
 			if(!$alreadysend)
 			{
-				//echo "<li>$vaknaam - Niet voldaan [Deadline: $datedisplay - $expiretxt]</li>";
-				echo("<tr><td>$vaknaam</td><td>Niet voldaan <img src='$basecss/images/notdone.jpg' alt='Niet voldaan'></td><td>$datedisplay $expiretxt</td></tr>");
+				if(!$expired)
+				{
+					//echo "<li>$vaknaam - Niet voldaan [Deadline: $datedisplay - $expiretxt]</li>";
+					echo("<tr><td>$vaknaam</td><td>Niet voldaan <img src='$basecss/images/notdone.jpg' alt='Niet voldaan'></td><td>$datedisplay $expiretxt</td><td><a href='$base/inleveren/vak/$row->subjectID'>Inleveren</a></td></tr>");
+				}
+				else
+				{
+					echo("<tr><td>$vaknaam</td><td>Niet voldaan <img src='$basecss/images/notdone.jpg' alt='Niet voldaan'></td><td>$datedisplay $expiretxt</td><td>Deadline verstreken.</td></tr>");
+				}
 			}
 			else
 			{
-				//echo "<li>$vaknaam - Ingeleverd</a></li>";
-				echo("<tr><td>$vaknaam</td><td>Voldaan <img src='$basecss/images/done.jpg' alt='Voldaan'></td><td>$datedisplay $expiretxt</td></tr>");
+				if(!$expired)
+				{
+					//echo "<li>$vaknaam - Ingeleverd</a></li>";
+					echo("<tr><td>$vaknaam</td><td>Voldaan <img src='$basecss/images/done.jpg' alt='Voldaan'></td><td>$datedisplay $expiretxt</td><td><a href='$base/inleveren/edit/$row->subjectID/'>aanpassen</a></td></tr>");
+				}
+				else
+				{
+					echo("<tr><td>$vaknaam</td><td>Voldaan <img src='$basecss/images/done.jpg' alt='Voldaan'></td><td>$datedisplay $expiretxt</td><td>Aanpassen niet mogelijk.</td></tr>");
+				}
 			}
 	    }
 	    echo("</table>");

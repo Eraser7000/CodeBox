@@ -35,9 +35,19 @@
 		$base = base_url() . "index.php";
 		if($alreadysend)
 		{
-			//echo("<li><a href='$base/overzicht/subject/$studyid/$row->username/$subjectid'>$row->username - Download bestand.</a>");
-			echo("<tr><td>$fullname</td><td><a href='$base/overzicht/subject/$studyid/$row->username/$subjectid'>Download</a></td></tr>");
-			$count++;
+			if($this->user->getrolefromdb($row->username) != "administrator")
+			{
+				//echo("<li><a href='$base/overzicht/subject/$studyid/$row->username/$subjectid'>$row->username - Download bestand.</a>");
+				if($rolename != "administrator")
+				{
+					echo("<tr><td>$fullname</td><td><a href='$base/overzicht/subject/$studyid/$row->username/$subjectid'>Download</a></td></tr>");
+				}
+				else
+				{
+					echo("<tr><td>$fullname</td><td><a href='$base/overzicht/subject/$studyid/$row->username/$subjectid'>[Download]</a> -- <a href='$base/administratie/deletefile/$row->username/$subjectid' onclick=\"return confirm('Zeker weten?');\">[Verwijderen]</a></td></tr>");
+				}
+				$count++;
+			}
 		}
 	}
 	if($count == 0)
@@ -62,8 +72,11 @@
 		$fullname = $this->user->getfullnamefromdb($row->username);
 		if(!$alreadysend)
 		{
-			echo("<tr><td>$fullname</td></tr>");
-			$count++;
+			if($this->user->getrolefromdb($row->username) != "administrator")
+			{
+				echo("<tr><td>$fullname</td></tr>");
+				$count++;
+			}
 		}
 	}
 	if($count == 0)

@@ -31,7 +31,7 @@ h3
 {
 	border:#E2E2E2 1px solid;
 	width: 505px;
-	height: 335px;
+	height: auto;
 	margin-left: auto ;
 	margin-right: auto ;
 	border-radius: 10px 10px 10px 10px;

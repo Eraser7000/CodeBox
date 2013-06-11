@@ -56,11 +56,53 @@
         <description>Wiskunde Basis</description>
         <expire>10-06-2013 23:59:59</expire>
   </course>
-    <course>  
+  <course>  
         <name>Cryptografie - Jaar 1</name> 
         <shortname>crypt</shortname>
         <study>Informatica BA</study>
         <description>Cryptografie</description>
         <expire>10-06-2013 23:59:59</expire>
+  </course>
+  <course>  
+        <name>Project P4P - Jaar 1</name> 
+        <shortname>p4p</shortname>
+        <study>Informatica BA</study>
+        <description>P4P</description>
+        <expire>30-06-2013 23:59:59</expire>
+  </course>
+  <course>  
+        <name>Project P4P - Jaar 1</name> 
+        <shortname>p4p</shortname>
+        <study>Testgroep</study>
+        <description>P4P</description>
+        <expire>30-06-2013 23:59:59</expire>
+  </course>
+  <course>  
+        <name>Vak A - Jaar 1</name> 
+        <shortname>vaka</shortname>
+        <study>Testgroep</study>
+        <description>VakA</description>
+        <expire>30-06-2013 23:59:59</expire>
+  </course>
+  <course>  
+        <name>Vak B - Jaar 1</name> 
+        <shortname>vakb</shortname>
+        <study>Testgroep</study>
+        <description>VakB</description>
+        <expire>30-06-2013 23:59:59</expire>
+  </course>
+  <course>  
+        <name>Vak C - Jaar 1</name> 
+        <shortname>vakc</shortname>
+        <study>Testgroep</study>
+        <description>VakC</description>
+        <expire>30-06-2013 23:59:59</expire>
+  </course>
+  <course>  
+        <name>Vak D - Jaar 1</name> 
+        <shortname>vakd</shortname>
+        <study>Testgroep</study>
+        <description>VakD</description>
+        <expire>30-06-2013 23:59:59</expire>
   </course>
 </courses>

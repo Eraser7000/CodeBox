@@ -10,7 +10,7 @@
 	}
 	else
 	{
-		echo("<table border='1'><tr><th>Leerling</th><th>Status</th><th>Deadline</th><th>Download</th></tr>");
+		echo("<table border='1'><tr><th>Vak</th><th>Status</th><th>Deadline</th><th>Download</th></tr>");
 		foreach ($result as $row)
 		{
 			$vaknaam = $row->name;
@@ -32,8 +32,15 @@
 			else
 			{
 				$base = base_url() . "index.php";
-				//echo "<li><a href='$base/overzicht/subject/$studyid/$studentname/$row->subjectID'>$vaknaam - Download bestand.</a>  [Deadline: $datedisplay - $expiredtext]</li>";
-				echo("<tr><td>$vaknaam</td><td>Voldaan <img src='$basecss/images/done.jpg' alt='Voldaan'></td><td>$datedisplay</td><td><a href='$base/overzicht/subject/$studyid/$studentname/$row->subjectID'>Download</a></td></tr>");
+				if($rolename != "administrator")
+				{
+					//echo "<li><a href='$base/overzicht/subject/$studyid/$studentname/$row->subjectID'>$vaknaam - Download bestand.</a>  [Deadline: $datedisplay - $expiredtext]</li>";
+					echo("<tr><td>$vaknaam</td><td>Voldaan <img src='$basecss/images/done.jpg' alt='Voldaan'></td><td>$datedisplay</td><td><a href='$base/overzicht/subject/$studyid/$studentname/$row->subjectID'>Download</a></td></tr>");
+				}
+				else
+				{
+					echo("<tr><td>$vaknaam</td><td>Voldaan <img src='$basecss/images/done.jpg' alt='Voldaan'></td><td>$datedisplay</td><td><a href='$base/overzicht/subject/$studyid/$studentname/$row->subjectID'>Download</a> -- <a href='$base/administratie/deletefile/$studentname/$row->subjectID' onclick=\"return confirm('Zeker weten?');\">[Verwijderen]</a></td></tr>");
+				}
 			}
 	    }
 	 }

@@ -42,7 +42,7 @@ class VerifyMail extends MY_Controller
 			}
 			else
 			{
-				$this->email->from('Codeboxmasters@gmail.com', $this->user->getemailfromldap($username));
+				$this->email->from('Codeboxmasters@gmail.com', $this->user->getemail($username));
 			}
 			$mails = "";
 			$result = $this->user->returnusersfromsubject($subjectid);
@@ -50,7 +50,7 @@ class VerifyMail extends MY_Controller
 			{
 				if(!$this->user->isalreadysend($row->username,$subjectid))
 				{
-					$mails = $mails . "," . $this->user->getemail($username);
+					$mails = $mails . "," . $this->user->getemail($row->username);
 				}
 			}
 			$mails = substr($mails, 1);
@@ -67,7 +67,8 @@ class VerifyMail extends MY_Controller
 			
 			else
 			{
-				show_error($this->email->print_debugger());
+				echo("<script>alert('Er is iets fout gegaan!')</script>");
+				redirect('overzicht', 'refresh');
 			}
 		}
 	}

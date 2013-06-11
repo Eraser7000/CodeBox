@@ -30,6 +30,7 @@ class Inleveren extends MY_Controller
 		$result = $this->user->subjects($data['username']);
 		$this->load->view('enroledvakken_view', $data);
 		$this->load->view('templates/footer', $data);
+		redirect('overzicht', 'refresh');
 	}
 	//Called when the user clicks 'inleveren', this will redirect to the upload screen giving the required parameters to the 
 	//uploadfunction to be parsed.

@@ -41,6 +41,7 @@ class Xmlparser_model extends CI_Model {
 		{
 			$studyid = $this->globalfunc->getstudyidfromname((string)$course->study);
 			if(!$this->globalfunc->studyexists($studyid)) { continue; }
+			if(strpos((string)$course->shortname,' ') !== false) { continue; }
 			$this->db->select('Shortname');
 			$this->db->from('subject');
 			$this->db->where('Shortname', (string)$course->shortname);

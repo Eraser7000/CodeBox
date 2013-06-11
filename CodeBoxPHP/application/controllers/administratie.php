@@ -22,6 +22,15 @@ class Administratie extends MY_Controller
 		$this->load->view('administratie_view', $data);
 		$this->load->view('templates/footer', $data);
 	}
+	//Flushes the users table in the database
+	function flushusers()
+	{
+		$this->load->view('templates/header', $data);
+		$this->user->deleteallusers();
+		$this->load->view('templates/footer', $data);
+		echo("<script>alert('Gebruikers succesvol verwijderd!');</script>");
+		redirect('administratie', 'refresh');		
+	}
 	//Called to load the users from LDAP into our database. This function is very resource intensive, so use with care.
 	function addusers()
 	{
@@ -52,9 +61,16 @@ class Administratie extends MY_Controller
 			}
 		}
 		$this->user->removeinactiveusers();
+		$this->load->view('templates/footer', $data);
 		echo("<script>alert('Gebruikers succesvol geupdate.');</script>");
 		redirect('administratie', 'refresh');
-		$this->load->view('templates/footer', $data);
+	}
+	//Deletes a subject
+	function deletefile($user,$subjectid)
+	{
+		$this->globalfunc->deletefile($user,$subjectid);
+		echo("<script>alert('Bestand verwijderd!'); history.go(-1);</script>");
+
 	}
 	//Loads the XMLs provided by the teachers
 	function loadxml()
@@ -68,9 +84,9 @@ class Administratie extends MY_Controller
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/menu', $data);
 		$this->Xmlparser_model->insert();
+		$this->load->view('templates/footer', $data);
 		echo("<script>alert('XML ingeladen in de database!');</script>");
 		redirect('administratie', 'refresh');
-		$this->load->view('templates/footer', $data);
 	}
 	//Cleans up entries from the database which are no longer relevant [such as deleted files].
 	function cleanupdatabase()
@@ -84,9 +100,9 @@ class Administratie extends MY_Controller
 		$this->load->view('templates/menu', $data);
 		$this->globalfunc->cleanupdbentries();
 		$this->user->removeinactiveusers();
+		$this->load->view('templates/footer', $data);
 		echo("<script>alert('Succesvol opgeschoond!');</script>");
 		redirect('administratie', 'refresh');
-		$this->load->view('templates/footer', $data);
 	}
 	//Parser using XML to load all subjects into the database.
 	function addsubjects()
@@ -97,9 +113,9 @@ class Administratie extends MY_Controller
 		$data['rolename'] = $rolename;
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/menu', $data);
+		$this->load->view('templates/footer', $data);
 		echo("<script>alert('Deze functie moet nog geimplementeerd worden!');</script>");
 		redirect('administratie', 'refresh');
-		$this->load->view('templates/footer', $data);
 	}
 	//This function creates random passwords for every single account. A list will be displayed, sorted by Study. In case LDAP is not being implemented.
 	function generaterandompasswords()

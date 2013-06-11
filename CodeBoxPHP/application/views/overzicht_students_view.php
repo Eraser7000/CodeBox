@@ -15,9 +15,12 @@
 		{
 			//$username_displ = $this->user->getfullnamefromldap($row->username);
 			$fulluser = ucfirst($row->fullname);
-			$base = base_url();
-			//echo("<li><a href='$base" . "index.php/overzicht/student/$studyid/$row->username'>$fulluser</a></li>");
-			echo("<tr><td><a href='$base" . "index.php/overzicht/student/$studyid/$row->username'>$fulluser</a></td></tr>");
+			if($this->user->getrolefromdb($row->username) != "administrator")
+			{
+				$base = base_url();
+				//echo("<li><a href='$base" . "index.php/overzicht/student/$studyid/$row->username'>$fulluser</a></li>");
+				echo("<tr><td><a href='$base" . "index.php/overzicht/student/$studyid/$row->username'>$fulluser</a></td></tr>");
+			}
 		}
 		echo("</table>");
 	}

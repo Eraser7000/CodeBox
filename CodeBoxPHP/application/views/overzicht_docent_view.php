@@ -13,10 +13,11 @@
 		$base = base_url();
 		if (strpos($name,'DOCENTEN') !== false) 
 		{
-			//echo("<li><a href='$base" . "index.php/overzicht/choice/$row->id'>$name</a></li>");
+			//doe niks
 		}
 		else
 		{
+			//echo("<li><a href='$base" . "index.php/overzicht/choice/$row->id'>$name</a></li>");
 			echo("<tr><td><a href='$base" . "index.php/overzicht/choice/$row->id'>$name</a></td></tr>");
 		}
 	}
@@ -25,4 +26,4 @@
 </div>
 
 <br/>
-<input type = "button" name = "ReturnButton" onclick = "history.go(-1);" value="Terug"/>
+<!-- <input type = "button" name = "ReturnButton" onclick = "history.go(-1);" value="Terug"/> -->
