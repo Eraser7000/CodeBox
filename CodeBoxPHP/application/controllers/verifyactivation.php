@@ -12,8 +12,12 @@ class VerifyActivation extends CI_Controller
 	function index()
 	{
 		$this->load->library('form_validation');
-	    $this->form_validation->set_rules('password', 'password', 'trim|required|xss_clean|min_length[5]|max_length[12]|matches[passwordconfirm]');
-	    $this->form_validation->set_rules('passwordconfirm', 'passwordconfirm', 'trim|required|xss_clean|min_length[5]|max_length[12]|callback_updateuser');
+	    $this->form_validation->set_rules('password', 'password', 'trim|required|xss_clean|min_length[5]|max_length[20]|matches[passwordconfirm]');
+	    $this->form_validation->set_rules('passwordconfirm', 'passwordconfirm', 'trim|required|xss_clean|min_length[5]|max_length[20]|callback_updateuser');
+	    $this->form_validation->set_message('required', '');
+	    $this->form_validation->set_message('min_length', 'Minimale lengte is 5 tekens!');
+	    $this->form_validation->set_message('max_length', 'Maximale lengte is 20 tekens!');
+	    $this->form_validation->set_message('matches', 'Wachtwoorden komen niet overeen!');
 		if($this->form_validation->run() == FALSE)
 		{
 			$this->load->view('activate_view');
