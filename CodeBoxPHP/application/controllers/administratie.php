@@ -25,6 +25,11 @@ class Administratie extends MY_Controller
 	//Flushes the users table in the database
 	function flushusers()
 	{
+		$data['title'] = "Administratie";
+		$session_data = $this->session->userdata('logged_in');
+		$data['username'] = $session_data['username'];
+		$rolename = $session_data['role'];
+		$data['rolename'] = $rolename;
 		$this->load->view('templates/header', $data);
 		$this->user->deleteallusers();
 		$this->load->view('templates/footer', $data);
@@ -43,6 +48,7 @@ class Administratie extends MY_Controller
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/menu', $data);
 		//get all students
+
 		$result = $this->user->allstudents();
 		foreach($result as $row)
 		{
@@ -68,7 +74,14 @@ class Administratie extends MY_Controller
 	//Deletes a subject
 	function deletefile($user,$subjectid)
 	{
+		$data['title'] = "Administratie";
+		$session_data = $this->session->userdata('logged_in');
+		$data['username'] = $session_data['username'];
+		$rolename = $session_data['role'];
+		$data['rolename'] = $rolename;
+		$this->load->view('templates/header', $data);
 		$this->globalfunc->deletefile($user,$subjectid);
+		$this->load->view('templates/footer', $data);
 		echo("<script>alert('Bestand verwijderd!'); history.go(-1);</script>");
 
 	}

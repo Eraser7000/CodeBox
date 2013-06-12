@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://codebox.tech.nhl.nl/';
+$config['base_url']	= ''; //http://codebox.tech.nhl.nl/
 
 /*
 |--------------------------------------------------------------------------
@@ -244,7 +244,7 @@ $config['encryption_key'] = 'NMZZzas2QUaJV9UGTvkvAsdd6sR';
 | 'sess_time_to_update'		= how many seconds between CI refreshing Session Information
 |
 */
-$config['sess_cookie_name']		= 'cb_rnd_name';
+$config['sess_cookie_name']		= 'cb_rnd_sess';
 $config['sess_expiration']		= 7200;
 $config['sess_expire_on_close']	= TRUE;
 $config['sess_encrypt_cookie']	= TRUE;
