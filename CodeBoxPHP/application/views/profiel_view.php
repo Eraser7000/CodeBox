@@ -1,6 +1,6 @@
 <h3>Algemene informatie</h3>
 
 <?php
-	$var = $this->user->getfullnamefromldap($username);
+	$var = $this->user->getfullnamefromdb($username);
 	echo("Naam: $var");
 ?>

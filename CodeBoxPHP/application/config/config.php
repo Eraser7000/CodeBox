@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= ''; //http://codebox.tech.nhl.nl/
+$config['base_url']	= 'http://codebox.tech.nhl.nl/'; //http://codebox.tech.nhl.nl/
 
 /*
 |--------------------------------------------------------------------------

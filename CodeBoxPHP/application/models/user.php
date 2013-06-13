@@ -391,6 +391,12 @@ Class User extends CI_Model
 		$subjectquery = $this->db->query("SELECT subjectID,shortname,name FROM subject WHERE studyid = '$studyid' ORDER BY name ASC");
 		return $subjectquery->result();
 	}
+	//Returns all projects for an user.
+	function projects($username)
+	{
+		$query = $this->db->query("SELECT project.id,project.shortname,project.name FROM project,groups,groupenrole WHERE groupenrole.groupid = groups.id AND groupenrole.username = '$username' AND project.id = groups.projectid ORDER BY project.name ASC");
+		return $query->result();
+	}
 	//Returns all users from LDAP.
 	function allstudents()
 	{
@@ -404,6 +410,26 @@ Class User extends CI_Model
 		ini_set("include_path", _includepath_);
 		require_once("ldap.php");
 		return LDAP::ldapallteachers();
+	}
+	//Returns name of a group by giving this function the projectid and the username.
+	function getgroupidfromuser($username,$projectid)
+	{
+		$query = $this->db->query("SELECT groups.id FROM groups,groupenrole WHERE groupenrole.username = '$username' AND groups.projectid = '$projectid' AND groups.id = groupenrole.groupid");
+		foreach($query->result() as $row)
+		{
+			return $row->id;
+		}
+		return -1;
+	}
+	//Returns true or false depending on the fact if the user is in a specific group or not
+	function isuseringroup($username,$groupid)
+	{
+		$query = $this->db->query("SELECT * FROM groups,groupenrole WHERE groups.id = groupenrole.groupid AND groups.id = '$groupid' AND groupenrole.username = '$username'");
+		if(count($query->result()) > 0)
+		{
+			return true;
+		}
+		return false;
 	}
 }
 ?>

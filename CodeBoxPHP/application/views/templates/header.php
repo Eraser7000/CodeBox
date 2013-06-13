@@ -37,5 +37,5 @@
 	<body>
 		<h1 class = "content">Codebox - Welkom <?php $usernamevar = $this->user->getfullnamefromdb($username); echo $usernamevar?>, u bent ingelogd als <?php echo $rolename ?></h1>
 		<div id="preLoaderDiv">
-			<img id="preloaderAnimation" src="/images/loader.gif" />
+			<img id="preloaderAnimation" src="<?php echo base_url() ?>images/loader.gif" />
 		</div>

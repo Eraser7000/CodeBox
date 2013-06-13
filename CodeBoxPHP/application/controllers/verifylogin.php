@@ -16,7 +16,7 @@ class VerifyLogin extends CI_Controller
 		$this->load->library('form_validation');
 	    $this->form_validation->set_rules('username', 'username', 'trim|required|xss_clean');
 	    $this->form_validation->set_rules('password', 'password', 'trim|required|xss_clean|callback_check_database');
-	    $this->form_validation->set_message('required', ' * verplicht');
+	    $this->form_validation->set_message('required', '');
 	    $this->form_validation->set_error_delimiters('', '');
 		if($this->form_validation->run() == FALSE)
 		{

@@ -12,6 +12,7 @@ class VerifyMail extends MY_Controller
 	{
 		//
 	}
+	//Handles the mail
 	function handle($subjectid)
 	{
 		$this->load->library('form_validation');

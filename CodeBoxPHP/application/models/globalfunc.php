@@ -16,6 +16,42 @@ Class Globalfunc extends CI_Model
 			return $row->name;
 		}
 	}
+	//Returns name of a group by its unique id.
+	function getgroupnamefromid($groupid)
+	{
+		$query = $this->db->query("SELECT name FROM groups WHERE id = '$groupid'");
+		foreach($query->result() as $row)
+		{
+			return $row->name;
+		}
+	}
+	//Checks if a file for a project is send or not.
+	function projectdelivered($groupid,$projectid)
+	{
+		//$this->load->model('globalfunc','',TRUE);
+		$short_project_name = $this->getshortprojectnamefromid($projectid);
+		$short_group_name = $this->getshortgroupnamefromid($groupid);
+
+		$filename = "proj_" . $short_project_name . "_" . $short_group_name . "_";
+		$result = glob("files/$filename*.*");
+		if(count($result) > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	//Returns the name of a project from the database according to its ID
+	function getprojectnamefromid($projectid)
+	{
+		$query = $this->db->query("SELECT Name FROM project WHERE id = '$projectid'");
+		foreach($query->result() as $row)
+		{
+			return $row->Name;
+		}		
+	}
 	//Returns ID of a study by its name
 	function getstudyidfromname($studyname)
 	{
@@ -55,15 +91,37 @@ Class Globalfunc extends CI_Model
 			return false;
 		}
 	}
+	//Checks if a project is expired or not.
+	function expiredproject($projectid)
+	{
+		if($this->todaydateindbformat() >= $this->getexpireprojectdatafromdb($projectid))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 	//Checks if a subject exists in our local database.
 	function subjectexists($subjectid)
 	{
 		$query = $this->db->query("SELECT * FROM subject WHERE subjectid = '$subjectid'");
-		$count = 0;
-		foreach($query->result() as $row)
+		$count = count($query->result());
+		if($count > 0)
 		{
-			$count++;
+			return true;
 		}
+		else
+		{
+			return false;
+		}
+	}
+	//Checks if a project exists in our local database.
+	function projectexists($projectid)
+	{
+		$query = $this->db->query("SELECT * FROM project WHERE id = '$projectid'");
+		$count = count($query->result());
 		if($count > 0)
 		{
 			return true;
@@ -83,6 +141,44 @@ Class Globalfunc extends CI_Model
 	{
 		$query = $this->db->query("DELETE FROM files WHERE subjectid = '$subjectid'");
 		$query2 = $this->db->query("DELETE FROM subject WHERE subjectid = '$subjectid'");
+	}
+	//Adds a project to the db.
+	function addgroup($projectid,$groupname)
+	{
+		$shortname = str_replace(' ','_',$groupname);
+		$query = $this->db->query("INSERT INTO groups (name,shortname,projectid) VALUES ('$groupname','$shortname','$projectid') ");
+	}
+	//Adds a user to a group in the db.
+	function addusertogroup($groupid,$username)
+	{
+		$query = $this->db->query("INSERT INTO groupenrole (username,groupid) VALUES ('$username','$groupid') ");
+	}
+	//Removes a user from a group in the db.
+	function deleteuserfromgroup($groupid,$username)
+	{
+		$query = $this->db->query("DELETE FROM groupenrole WHERE username ='$username' AND groupid = '$groupid'");
+	}
+	//Deletes a group including its content
+	function deletegroup($groupid)
+	{
+		$query = $this->db->query("DELETE FROM groups WHERE id = '$groupid'");
+		$query = $this->db->query("DELETE FROM groupenrole WHERE groupid = '$groupid'");
+	}
+	//Adds a project to the db.
+	function addproject($studyid,$projectname)
+	{
+		$shortname = str_replace(' ','_',$projectname);
+		$query = $this->db->query("INSERT INTO project (name,shortname,studyid) VALUES ('$projectname','$shortname','$studyid') ");
+	}
+	//Deletes a project, including its content in the database.
+	function deleteproject($projectid)
+	{
+		$query = $this->db->query("SELECT * FROM groups WHERE projectid = '$projectid'");
+		foreach($query->result() as $row)
+		{
+			$this->deletegroup($row->id);
+		}
+		$query = $this->db->query("DELETE FROM project WHERE id = '$projectid'");
 	}
 	//Deletes a file
 	function deletefile($user,$subjectid)
@@ -106,6 +202,12 @@ Class Globalfunc extends CI_Model
     	} 
     	$query = $this->db->query("DELETE FROM files WHERE name like '$fileformat%'");
 	}
+	//Returns a nice list of groupmembers belonging to a group
+	function projectgroupmembers($groupid)
+	{
+		$query = $this->db->query("SELECT * FROM groupenrole WHERE groupid = '$groupid'");
+		return $query->result();
+	}
 	//Checks if a study exists in our local database.
 	function studyexists($studyid)
 	{
@@ -124,10 +226,39 @@ Class Globalfunc extends CI_Model
 			return false;
 		}
 	}
+	//Checks if a group actually exists, this is used to prevent vague groups from being created
+	function groupexists($groupid)
+	{
+		$query = $this->db->query("SELECT * FROM groups WHERE id = '$groupid'");
+		$count = count($query->result());
+		if($count > 0)
+		{
+			return true;
+		}
+		return false;
+	}
 	//Returns the shortname of a subject from the database.
 	function getshortsubjectnamefromid($subjectid)
 	{
 		$query = $this->db->query("SELECT shortname FROM subject WHERE subjectid = '$subjectid'");
+		foreach($query->result() as $row)
+		{
+			return $row->shortname;
+		}
+	}
+	//Returns the shortname of a project from the database.
+	function getshortprojectnamefromid($projectid)
+	{
+		$query = $this->db->query("SELECT shortname FROM project WHERE id = '$projectid'");
+		foreach($query->result() as $row)
+		{
+			return $row->shortname;
+		}
+	}
+	//Returns the shortname of a group from the database.
+	function getshortgroupnamefromid($groupid)
+	{
+		$query = $this->db->query("SELECT shortname FROM groups WHERE id = '$groupid'");
 		foreach($query->result() as $row)
 		{
 			return $row->shortname;
@@ -151,10 +282,32 @@ Class Globalfunc extends CI_Model
 		}
 		return -1;
 	}
+	//Returns the expiration date of a project from the local database.
+	function getexpireprojectdatafromdb($projectid)
+	{
+		$query = $this->db->query("SELECT expire FROM project WHERE id = '$projectid' LIMIT 1");
+		foreach($query->result() as $row)
+		{
+			return $row->expire;
+		}
+		return -1;
+	}
 	//Returns all subjects from a specific study.
 	function studysubjects($studyid)
 	{
 		$query = $this->db->query("SELECT subjectid,name FROM subject WHERE studyid = '$studyid' ORDER BY name");
+		return $query->result();
+	}
+	//Returns all groups from a specific project.
+	function projectgroups($projectid)
+	{
+		$query = $this->db->query("SELECT * FROM groups WHERE projectid = '$projectid' ORDER BY Name");
+		return $query->result();
+	}
+	//Returns all projects from a specific study.
+	function studyprojects($studyid)
+	{
+		$query = $this->db->query("SELECT * FROM project WHERE studyid = '$studyid' ORDER BY name");
 		return $query->result();
 	}
 	//Returns all students of a specific study.
@@ -185,6 +338,21 @@ Class Globalfunc extends CI_Model
 			if($count == 0)
 			{
 				$query = $this->db->query("DELETE FROM files WHERE name = '$row->name'");
+			}
+		}
+		$query2 = $this->db->query("SELECT * FROM project_files");
+		foreach($query2->result() as $row)
+		{
+			$filename = $row->name;
+			$count = 0;
+			$result = glob ("files/$filename*.*");
+			foreach($result as $row2)
+			{
+				$count++;
+			}
+			if($count == 0)
+			{
+				$query = $this->db->query("DELETE FROM project_files WHERE name = '$row->name'");
 			}
 		}
 	}
