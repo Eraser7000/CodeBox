@@ -165,10 +165,10 @@ Class Globalfunc extends CI_Model
 		$query = $this->db->query("DELETE FROM groupenrole WHERE groupid = '$groupid'");
 	}
 	//Adds a project to the db.
-	function addproject($studyid,$projectname)
+	function addproject($studyid,$projectname,$timestamp)
 	{
 		$shortname = str_replace(' ','_',$projectname);
-		$query = $this->db->query("INSERT INTO project (name,shortname,studyid) VALUES ('$projectname','$shortname','$studyid') ");
+		$query = $this->db->query("INSERT INTO project (name,shortname,studyid,expire) VALUES ('$projectname','$shortname','$studyid','$timestamp') ");
 	}
 	//Deletes a project, including its content in the database.
 	function deleteproject($projectid)
