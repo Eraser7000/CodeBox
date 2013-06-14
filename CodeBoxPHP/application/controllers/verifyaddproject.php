@@ -71,7 +71,9 @@ class VerifyAddProject extends CI_Controller
 	function handlegroup($studyid,$projectid)
 	{
 		$this->load->library('form_validation');
-	    $this->form_validation->set_rules('groupname', 'groupname', 'trim|required|xss_clean');
+	    $this->form_validation->set_rules('groupname', 'groupname', 'trim|required|xss_clean|callback_groupname_unique');
+
+	    $this->form_validation->set_message('groupname_unique', 'Deze naam bestaat al, gelieve een andere naam te kiezen!');
 	    $this->form_validation->set_message('required', 'Groepnaam vereist!');
 	    $this->form_validation->set_error_delimiters('', '');
 	    $session_data = $this->session->userdata('logged_in');
@@ -102,12 +104,14 @@ class VerifyAddProject extends CI_Controller
 	function handleproject($studyid)
 	{
 		$this->load->library('form_validation');
-	    $this->form_validation->set_rules('projectname', 'projectname', 'trim|required|xss_clean');
+	    $this->form_validation->set_rules('projectname', 'projectname', 'trim|required|xss_clean|callback_projectname_unique');
 	    $this->form_validation->set_rules('expiredate', 'expiredate', 'trim|required|xss_clean|callback_is_valid_date');
 	    $this->form_validation->set_rules('expiretime', 'expiretime', 'trim|required|xss_clean|callback_is_valid_time');
 	    $this->form_validation->set_message('required', '');
 	    $this->form_validation->set_message('is_valid_date', 'Datum is onjuist [formaat: dag/maand/jaar, let op, de eeste 2 stukken moeten 2 getallen groot zijn, dus 02/02/2010 is goed, 2/2/2010 is fout]');
-	    $this->form_validation->set_message('is_valid_time', 'Tijd is onjuist [formaat: uur:minuut:seconden');
+	    $this->form_validation->set_message('is_valid_time', 'Tijd is onjuist [formaat: uur:minuut:seconden]');
+
+	    $this->form_validation->set_message('projectname_unique', 'Deze naam bestaat al, gelieve een andere naam te kiezen!');
 	    $this->form_validation->set_error_delimiters('', '');
 	    $session_data = $this->session->userdata('logged_in');
 	    $data['title'] = "Project toevoegen:";
@@ -132,6 +136,28 @@ class VerifyAddProject extends CI_Controller
 			echo("<script>history.go(-2);</script>");
 			//redirect('overzicht', 'refresh');
 		}
+	}
+	//Checks if the shortname of a project is unique or not, returns true or false.
+	//This to prevent duplicate downloads from being displayed for multiple projects.
+	function projectname_unique()
+	{
+		$projectname = $this->input->post('projectname');
+		if($this->globalfunc->isprojectnameunique($projectname))
+		{
+			return true;
+		}
+		return false;
+	}
+	//Checks if the shortname of a group is unique or not, returns true or false.
+	//This to prevent duplicate downloads from being displayed for multiple groups.
+	function groupname_unique()
+	{
+		$groupname = $this->input->post('groupname');
+		if($this->globalfunc->isgroupnameunique($groupname))
+		{
+			return true;
+		}
+		return false;
 	}
 	//Checks if the provided date is valid
 	function is_valid_date()

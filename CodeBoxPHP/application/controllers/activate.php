@@ -8,16 +8,30 @@ class Activate extends CI_Controller
 	}
 	function index()
 	{
-		$this->load->helper(array('form'));
-		$this->load->view('activate_view');
+		if($this->session->userdata('logged_in') && !_useLDAP_)
+		{
+			$this->load->helper(array('form'));
+			$this->load->view('activate_view');
+		}
+		else
+		{
+			redirect('login', 'refresh');
+		}
 	}
 	//Checks whetever the registered user is activated or not.
 	function activated_check()
 	{
-		$session_data = $this->session->userdata('logged_in');
-		if($session_data['activated'] == "ja")
+		if($this->session->userdata('logged_in') && !_useLDAP_)
 		{
-			redirect('home','refresh');
+			$session_data = $this->session->userdata('logged_in');
+			if($session_data['activated'] == "ja")
+			{
+				redirect('home','refresh');
+			}
+		}
+		else
+		{
+			redirect('login', 'refresh');
 		}
 	}
 }

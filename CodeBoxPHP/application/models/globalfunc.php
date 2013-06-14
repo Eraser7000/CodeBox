@@ -142,6 +142,36 @@ Class Globalfunc extends CI_Model
 		$query = $this->db->query("DELETE FROM files WHERE subjectid = '$subjectid'");
 		$query2 = $this->db->query("DELETE FROM subject WHERE subjectid = '$subjectid'");
 	}
+	//Checks if a groupname already exists in the database
+	function isgroupnameunique($groupname)
+	{
+		$shortname = str_replace(' ','',$groupname);
+		$shortname = str_replace('_','',$groupname);
+		$query = $this->db->query("SELECT * FROM groups WHERE shortname = '$shortname'");
+		if(count($query->result()) > 0)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	//Checks if a projectname already exists in the database
+	function isprojectnameunique($projectname)
+	{
+		$shortname = str_replace(' ','',$projectname);
+		$shortname = str_replace('_','',$projectname);
+		$query = $this->db->query("SELECT * FROM project WHERE shortname = '$shortname'");
+		if(count($query->result()) > 0)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
 	//Adds a project to the db.
 	function addgroup($projectid,$groupname)
 	{
