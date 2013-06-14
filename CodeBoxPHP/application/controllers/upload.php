@@ -15,7 +15,7 @@ class Upload extends MY_Controller
 	//Uploads the file to the specified position.
 	function do_upload()
 	{
-		$config['upload_path'] = '../../files/';
+		$config['upload_path'] = 'files/';
 		$config['allowed_types'] = 'rar|sql|zip';
 		$config['max_size']	= '100';
 		$config['max_width']  = '1024';

@@ -28,7 +28,14 @@
 			}
 			if($delivered)
 			{
-				echo("<tr><td><a href='$base" . "/overzicht/projectmembers/$studyid/$projectid/$row->id'>$row->Name</a></td><td><a href='$base" . "/overzicht/removegroup/$row->id' onclick=\"return confirm ('Zeker weten dat u deze groep wilt verwijderen?');\">Verwijderen</a></td><td><a href='$base/overzicht/download_projectfile/$projectid/$row->id'>Download</a></td><td>$deadlinetxt</td></tr>");
+				if($rolename != "administrator")
+				{
+					echo("<tr><td><a href='$base" . "/overzicht/projectmembers/$studyid/$projectid/$row->id'>$row->Name</a></td><td><a href='$base" . "/overzicht/removegroup/$row->id' onclick=\"return confirm ('Zeker weten dat u deze groep wilt verwijderen?');\">Verwijderen</a></td><td><a href='$base/overzicht/download_projectfile/$projectid/$row->id'>[Download]</a></td><td>$deadlinetxt</td></tr>");
+				}
+				else
+				{
+					echo("<tr><td><a href='$base" . "/overzicht/projectmembers/$studyid/$projectid/$row->id'>$row->Name</a></td><td><a href='$base" . "/overzicht/removegroup/$row->id' onclick=\"return confirm ('Zeker weten dat u deze groep wilt verwijderen?');\">Verwijderen</a></td><td><a href='$base/overzicht/download_projectfile/$projectid/$row->id'>[Download]</a> -- <a href='$base/administratie/deleteprojectfile/$projectid/$row->id' onclick=\"return confirm('Zeker weten?');\">[Verwijderen]</a></td><td>$deadlinetxt</td></tr>");
+				}
 			}
 			else
 			{

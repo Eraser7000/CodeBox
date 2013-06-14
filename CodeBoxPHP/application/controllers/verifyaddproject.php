@@ -126,7 +126,7 @@ class VerifyAddProject extends CI_Controller
 		else
 		{
 			$projectname = $this->input->post('projectname');
-			$timestamp = strtotime($this->input->post('expiredate') . " " . $this->input->post('expiretime'));
+			$timestamp = strtotime(str_replace('/', '-', $this->input->post('expiredate')) . " " . $this->input->post('expiretime'));
 			$this->globalfunc->addproject($studyid,$projectname,$timestamp);
 			echo("<script>alert('Project toegevoegd!');</script>");
 			echo("<script>history.go(-2);</script>");
@@ -152,7 +152,7 @@ class VerifyAddProject extends CI_Controller
 		}*/
 
 		$date_format = 'd-m-Y';
-		$input = $this->input->post('expiredate');
+		$input = str_replace('/', '-', $this->input->post('expiredate'));
 
 		$input = trim($input);
 		$time = strtotime($input);

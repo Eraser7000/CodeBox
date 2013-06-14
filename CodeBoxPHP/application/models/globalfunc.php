@@ -145,7 +145,8 @@ Class Globalfunc extends CI_Model
 	//Adds a project to the db.
 	function addgroup($projectid,$groupname)
 	{
-		$shortname = str_replace(' ','_',$groupname);
+		$shortname = str_replace(' ','',$groupname);
+		$shortname = str_replace('_','',$groupname);
 		$query = $this->db->query("INSERT INTO groups (name,shortname,projectid) VALUES ('$groupname','$shortname','$projectid') ");
 	}
 	//Adds a user to a group in the db.
@@ -167,7 +168,8 @@ Class Globalfunc extends CI_Model
 	//Adds a project to the db.
 	function addproject($studyid,$projectname,$timestamp)
 	{
-		$shortname = str_replace(' ','_',$projectname);
+		$shortname = str_replace(' ','',$projectname);
+		$shortname = str_replace('_','',$projectname);
 		$query = $this->db->query("INSERT INTO project (name,shortname,studyid,expire) VALUES ('$projectname','$shortname','$studyid','$timestamp') ");
 	}
 	//Deletes a project, including its content in the database.
@@ -191,7 +193,7 @@ Class Globalfunc extends CI_Model
 			$fileformat = $shortname . "_" . $user . "_";
  			break;
 		}
-		$path = $_SERVER['DOCUMENT_ROOT'].'/CodeBox/files/';
+		$path = 'files/';
 		$files = glob($path.$fileformat.'*'); // get all file names
     	foreach($files as $file)
     	{ // iterate files
@@ -201,6 +203,29 @@ Class Globalfunc extends CI_Model
         	}
     	} 
     	$query = $this->db->query("DELETE FROM files WHERE name like '$fileformat%'");
+	}
+	//Deletes a projectfile
+	function deleteprojectfile($projectid,$groupid)
+	{
+		$query = $this->db->query("SELECT project.SHORTNAME, groups.shortname FROM project,groups WHERE project.id = groups.projectid AND project.id = '$projectid' AND groups.id = '$groupid'");
+		$fileformat = "";
+		foreach($query->result() as $row)
+		{
+			$project_short_name = $row->SHORTNAME;
+			$group_short_name = $row->shortname;
+			$fileformat = "proj_" . $project_short_name . "_" . $group_short_name . "_";
+ 			break;
+		}
+		$path = 'files/';
+		$files = glob($path.$fileformat.'*'); // get all file names
+    	foreach($files as $file)
+    	{ // iterate files
+      		if(is_file($file))
+      		{
+        		unlink($file);
+        	}
+    	} 
+    	$query = $this->db->query("DELETE FROM project_files WHERE name like '$fileformat%'");
 	}
 	//Returns a nice list of groupmembers belonging to a group
 	function projectgroupmembers($groupid)

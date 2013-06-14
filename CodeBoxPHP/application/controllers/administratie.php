@@ -85,6 +85,20 @@ class Administratie extends MY_Controller
 		echo("<script>alert('Bestand verwijderd!'); history.go(-1);</script>");
 
 	}
+	//Deletes a projectfile
+	function deleteprojectfile($projectid,$groupid)
+	{
+		$data['title'] = "Administratie";
+		$session_data = $this->session->userdata('logged_in');
+		$data['username'] = $session_data['username'];
+		$rolename = $session_data['role'];
+		$data['rolename'] = $rolename;
+		$this->load->view('templates/header', $data);
+		$this->globalfunc->deleteprojectfile($projectid,$groupid);
+		$this->load->view('templates/footer', $data);
+		echo("<script>alert('Bestand verwijderd!'); history.go(-1);</script>");
+
+	}
 	//Loads the XMLs provided by the teachers
 	function loadxml()
 	{
