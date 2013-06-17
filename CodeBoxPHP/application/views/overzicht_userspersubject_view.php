@@ -27,7 +27,7 @@
 
 	$result = $this->globalfunc->getstudentsinsubject($studyid,$subjectid);
 	$count = 0;
-	echo("<table border='1'><tr><th>Leerling</th><th>Download</th></tr>");
+	echo("<table><tr><th>Leerling</th><th>Download</th></tr>");
 	foreach($result as $row)
 	{
 		$alreadysend = $this->user->isalreadysend($row->username,$subjectid);
@@ -50,12 +50,11 @@
 			}
 		}
 	}
+	echo("</table>");	
 	if($count == 0)
 	{
-		echo("Niemand heeft iets voor dit vak ingeleverd!");
-		echo("<tr><td>Leeg</td><td>-</td></tr></table><br/>");	
+		echo("<br/>Niemand heeft iets voor dit vak ingeleverd!");
 	}
-	echo("</table>");	
 
 ?></div>
 
@@ -65,7 +64,7 @@
 
 	$result = $this->globalfunc->getstudentsinsubject($studyid,$subjectid);
 	$count = 0;
-	echo("<table border='1'><tr><th>Leerling</th></tr>");
+	echo("<table><tr><th>Leerling</th></tr>");
 	foreach($result as $row)
 	{
 		$alreadysend = $this->user->isalreadysend($row->username,$subjectid);
@@ -81,7 +80,6 @@
 	}
 	if($count == 0)
 	{
-		echo("<tr><td>Leeg</td><td>-</td></tr></table><br/>");
 		echo("Niemand hoeft meer iets in te leveren.<br/>");
 	}
 	echo("</table>");

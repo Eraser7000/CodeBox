@@ -11,7 +11,7 @@
 	}
 	else
 	{
-		echo("<table border='1'><tr><th>Groepleden</th><th>Moderatie</th></tr>");
+		echo("<table><tr><th>Groepleden</th><th>Moderatie</th></tr>");
 		foreach($result as $row)
 		{
 			$fullname = $this->user->getfullnamefromdb($row->username);

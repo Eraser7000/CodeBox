@@ -15,7 +15,7 @@
 	}
 	else
 	{
-		echo("<table border='1'><tr><th>Vak</th><th>Status</th><th>Deadline</th><th>Inleveren</th></tr>");
+		echo("<table><tr><th>Vak</th><th>Status</th><th>Deadline</th><th>Inleveren</th></tr>");
 		foreach ($result as $row)
 		{
 			$vaknaam = $row->name;
@@ -31,7 +31,7 @@
 			$base = base_url() . "index.php";
 			if($expired)
 			{
-				$expiretxt = "<img src='$basecss/images/expired.jpg' alt='Verlopen'>";
+				$expiretxt = "<img src='$basecss/images/notdone.jpg' alt='Verlopen'>";
 			}
 			if(!$alreadysend)
 			{
@@ -72,7 +72,7 @@
 	}
 	else
 	{
-		echo("<table border='1'><tr><th>Project</th><th>Groep</th><th>Status</th><th>Deadline</th><th>Inleveren</th></tr>");
+		echo("<table><tr><th>Project</th><th>Groep</th><th>Status</th><th>Deadline</th><th>Inleveren</th></tr>");
 	    foreach($result2 as $row)
 	    {
 	    	$groupid = $this->user->getgroupidfromuser($username,$row->id);
@@ -85,7 +85,7 @@
 			$datedisplay = $date->format('d/m/Y H:i:s');
 			if($expired)
 			{
-				$expiretxt = "<img src='$basecss/images/expired.jpg' alt='Verlopen'>";
+				$expiretxt = "<img src='$basecss/images/notdone.jpg' alt='Verlopen'>";
 			}
 			if(!$alreadysend)
 			{

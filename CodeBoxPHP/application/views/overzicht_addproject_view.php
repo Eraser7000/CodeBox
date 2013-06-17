@@ -7,6 +7,8 @@
 		<b>Vervaltijdstip:</b><br/>
 		<input id = "expiretime" type="text" size="12" maxlength="20" name="expiretime" Class = "boxes"><br />
 		<button id = "button" type="submit">Aanmaken</button><br/>
-		<br/><b><?php echo validation_errors(); ?></b><br/>
+		<br/><b><?php echo form_error('projectname'); ?></b><br/>
+		<b><?php echo form_error('expiredate'); ?></b><br/>
+		<b><?php echo form_error('expiretime'); ?></b><br/><br/>
 
 <input type = "button" name = "ReturnButton" onclick = "history.go(-1);" value="Terug"/>

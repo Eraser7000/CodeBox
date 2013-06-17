@@ -10,7 +10,7 @@
 	}
 	else
 	{
-		echo("<table border='1'><tr><th>Leerling</th></tr>");
+		echo("<table><tr><th>Leerling</th></tr>");
 		foreach($result as $row)
 		{
 			//$username_displ = $this->user->getfullnamefromldap($row->username);

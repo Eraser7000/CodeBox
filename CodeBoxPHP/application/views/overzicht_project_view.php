@@ -7,7 +7,7 @@
 	$base = base_url() . "index.php";
 	if(count($result) == 0) { echo ("Er zijn geen projecten om weer te geven!"); } else
 	{
-		echo("<table border='1'><tr><th>Project</th><th>Deadline</th><th>Moderatie</th></tr>");
+		echo("<table><tr><th>Project</th><th>Deadline</th><th>Moderatie</th></tr>");
 		foreach($result as $row)
 		{
 			$deadline = $this->globalfunc->getexpireprojectdatafromdb($row->id);

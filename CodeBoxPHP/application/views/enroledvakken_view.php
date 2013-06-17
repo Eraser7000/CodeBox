@@ -12,7 +12,7 @@ Welkom, deze vakken zijn beschikbaar voor uw opleiding.
 	}
 	else
 	{
-		echo("<table border='1'><tr><th>Vak</th><th>Inleveren</th><th>Status</th></tr>");
+		echo("<table><tr><th>Vak</th><th>Inleveren</th><th>Status</th></tr>");
 		foreach ($result as $row)
 		{
 			$vaknaam = $row->name;

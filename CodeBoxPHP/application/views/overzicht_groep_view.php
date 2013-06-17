@@ -11,7 +11,7 @@
 	}
 	else
 	{
-		echo("<table border='1'><tr><th>Groep</th><th>Moderatie</th><th>Download</th><th>Deadline</th></tr>");
+		echo("<table><tr><th>Groep</th><th>Moderatie</th><th>Download</th><th>Deadline</th></tr>");
 		foreach($result as $row)
 		{
 			$delivered = $this->globalfunc->projectdelivered($row->id,$projectid);

@@ -10,7 +10,7 @@
 	}
 	else
 	{
-		echo("<table border='1'><tr><th>Vak</th><th>Status</th><th>Deadline</th><th>Download</th></tr>");
+		echo("<table><tr><th>Vak</th><th>Status</th><th>Deadline</th><th>Download</th></tr>");
 		foreach ($result as $row)
 		{
 			$vaknaam = $row->name;
