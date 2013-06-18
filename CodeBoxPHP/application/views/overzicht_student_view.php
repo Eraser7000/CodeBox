@@ -81,8 +81,13 @@
 			$deadline = $this->globalfunc->getexpireprojectdatafromdb($row->id);
 			$expired = $this->globalfunc->expiredproject($row->id); //projectid
 			$projectnaam = $row->name;
+			date_default_timezone_set('Europe/Amsterdam');
+			$date = new DateTime();
 			$date->setTimestamp($deadline);
 			$datedisplay = $date->format('d/m/Y H:i:s');
+			$expiretxt = "";
+			$basecss = base_url();
+			$base = base_url() . "index.php";
 			if($expired)
 			{
 				$expiretxt = "<img src='$basecss/images/notdone.jpg' alt='Verlopen'>";

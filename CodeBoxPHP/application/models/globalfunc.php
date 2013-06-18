@@ -175,8 +175,10 @@ Class Globalfunc extends CI_Model
 	//Adds a project to the db.
 	function addgroup($projectid,$groupname)
 	{
-		$shortname = str_replace(' ','',$groupname);
-		$shortname = str_replace('_','',$groupname);
+		$shortname = $groupname;
+		$shortname = str_replace(' ','',$shortname);
+		$shortname = str_replace('_','',$shortname);
+		$shortname = str_replace('/','',$shortname);
 		$query = $this->db->query("INSERT INTO groups (name,shortname,projectid) VALUES ('$groupname','$shortname','$projectid') ");
 	}
 	//Adds a user to a group in the db.
@@ -198,8 +200,10 @@ Class Globalfunc extends CI_Model
 	//Adds a project to the db.
 	function addproject($studyid,$projectname,$timestamp)
 	{
-		$shortname = str_replace(' ','',$projectname);
-		$shortname = str_replace('_','',$projectname);
+		$shortname = $projectname;
+		$shortname = str_replace(' ','',$shortname);
+		$shortname = str_replace('_','',$shortname);
+		$shortname = str_replace('/','',$shortname);
 		$query = $this->db->query("INSERT INTO project (name,shortname,studyid,expire) VALUES ('$projectname','$shortname','$studyid','$timestamp') ");
 	}
 	//Deletes a project, including its content in the database.
