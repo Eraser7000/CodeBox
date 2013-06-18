@@ -2,7 +2,7 @@
 
 <h3><?php echo "Het is nu: " . $datenow; ?></h3>
 
-<h2>Vakken:</h2>
+<h3>Vakken:</h3>
 <div class = "datagrid">
 <?php
 	$result = $this->user->subjects($username);
@@ -63,7 +63,7 @@
 ?>
 </div>
 <br/><br/>
-<h2>Projecten:</h2>
+<h3>Projecten:</h3>
 <div class = "datagrid">
 	<?php
 	if($count2 == 0)
