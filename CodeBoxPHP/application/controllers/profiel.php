@@ -5,6 +5,7 @@ class Profiel extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->model('user','',TRUE);
+		$this->load->model('globalfunc','',TRUE);
 	}
 	//Loads the profilepage for the user.
 	function index()

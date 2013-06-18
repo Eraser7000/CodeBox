@@ -6,7 +6,7 @@ class Xml_parser extends AD_Controller{
 	{
 		parent::__construct();
 		$this->load->helper('file');
-		$this->load->model('','globalfunc', TRUE);
+		$this->load->model('globalfunc','', TRUE);
 		//$this->load->library('dmenu');
 	}
 
