@@ -34,9 +34,9 @@ class Xmlparser_model extends CI_Model {
 
 	public function insert()
 	{
-		$data = get_filenames("uploads");
-		$file = end($data);
-		$xml = simplexml_load_file("uploads/".$file);
+		//$data = get_filenames("uploads");
+		//$file = end($data);
+		$xml = simplexml_load_file("uploads/vakken.xml"); // vakken.xml was .$file
 		foreach($xml as $course)
 		{
 			$studyid = $this->globalfunc->getstudyidfromname((string)$course->study);

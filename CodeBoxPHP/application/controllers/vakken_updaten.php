@@ -32,7 +32,7 @@ class Vakken_updaten extends MY_Controller
 	{
 		$data['title'] = "XML inladen";	
 		$config['upload_path'] = 'uploads/';
-		$config['allowed_types'] = 'xml';
+		$config['allowed_types'] = '*';
 		$config['max_size']	= '0';
 		$config['overwrite'] = true;
 		$config['file_name'] = 'vakken';
@@ -62,6 +62,7 @@ class Vakken_updaten extends MY_Controller
 			$this->load->view('templates/menu', $data);
 			$this->load->view('upload_xml_success', $data);
 			$this->load->view('templates/footer', $data);
+			$this->globalfunc->deleteallsubjects();
 			$this->xmlparser_model->insert();
 			$user = $data['username'];
 			$file = $uploadarr['full_path'];

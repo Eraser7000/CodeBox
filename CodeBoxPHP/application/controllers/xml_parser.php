@@ -6,7 +6,8 @@ class Xml_parser extends AD_Controller{
 	{
 		parent::__construct();
 		$this->load->helper('file');
-		$this->load->library('dmenu');
+		$this->load->model('','globalfunc', TRUE);
+		//$this->load->library('dmenu');
 	}
 
 //this function loads the xml file and parses it into the $data which will be sent to the views
@@ -15,9 +16,9 @@ class Xml_parser extends AD_Controller{
 		$data = get_filenames("uploads");
 		$file['file'] = end($data);
 
-		$dmenu = new Dmenu;
+		//$dmenu = new Dmenu;
 		
-		$data['menu'] = $dmenu->show_menu();
+		//$data['menu'] = $dmenu->show_menu();
 		$data['title'] = 'XML';
 
 		$this->load->view('templates/backend/header', $data);
