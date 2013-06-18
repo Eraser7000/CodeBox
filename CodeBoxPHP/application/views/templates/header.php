@@ -2,7 +2,7 @@
 	<head>
 		<title><?php echo $title ?> - CodeBox</title>
 		<link rel="stylesheet" type="text/css" href="<?=base_url()?>css/main.css" />
-		<link rel="stylesheet" type="text/css" href="<?=base_url()?>css/loader.css" />
+		<!-- <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/loader.css" /> -->
 	     <script language="javascript" type="text/javascript">
 	        function printDiv(divID) 
 	        {
@@ -24,6 +24,7 @@
 
 	          
 	        }
+	        /*
 			function checkLoad()
 			{
 			   	if(document.getElementById("bottom"))
@@ -32,11 +33,13 @@
 				}
 			}
 			setInterval("checkLoad()",500);
+			*/
 	    </script>
 	</head>
 	<body>
 		<h1>Codebox</h1><br/>
 		<h2>Welkom <?php $usernamevar = $this->user->getfullnamefromdb($username); echo $usernamevar?>, u bent ingelogd als <?php echo $rolename ?></h2><br/>
+		<!--
 		<div id="preLoaderDiv">
 			<img id="preloaderAnimation" src="<?php echo base_url() ?>images/loader.gif" />
-		</div>
+		</div>-->
