@@ -27,11 +27,13 @@ class VerifyLogin extends CI_Controller
 			redirect('home', 'refresh');
 		}
 	}
+
 	//Checks if the user is valid or not and entered the correct password.
 	//Also handles adminaccounts which are being redirected to the local database for auth.
 	//Handles LDAP-offline function too.
 	function check_database($password)
 	{
+		sleep(5);
 		if(_useLDAP_)
 		{
 			$username = $this->input->post('username');
